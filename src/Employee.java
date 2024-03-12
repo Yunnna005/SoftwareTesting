@@ -27,7 +27,7 @@ public class Employee {
     private void setAge(int empAge) {
 
         if ((empAge < 18 ) || (empAge > 62)) {
-            throw new IllegalArgumentException("The employee age must be betwee 18 and 62");
+            throw new IllegalArgumentException("The employee age must be between 18 and 62");
         }
         age = empAge;
     }

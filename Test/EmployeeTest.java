@@ -1,4 +1,8 @@
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,6 +16,7 @@ public class EmployeeTest {
     //Test Constructor
     @Test
     public void test_EmployeeConstructor(){
+        System.out.println("Testing Constructor");
         assertNotNull(employee);
     }
 
@@ -105,6 +110,7 @@ public class EmployeeTest {
         System.out.println("setAgeMethod");
 
         Employee e8 = new Employee("Anna Kovalenko", 19, 4);
+
         Method method = Employee.class.getDeclaredMethod("setAge", int.class);
         method.setAccessible(true);
         method.invoke(e8, 55);
