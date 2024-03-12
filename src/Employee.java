@@ -24,7 +24,7 @@ public class Employee {
     }
 
     // Assign the age of the Employee  to the variable age.
-    public void setAge(int empAge) {
+    private void setAge(int empAge) {
 
         if ((empAge < 18 ) || (empAge > 62)) {
             throw new IllegalArgumentException("The employee age must be betwee 18 and 62");

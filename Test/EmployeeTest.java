@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.security.PublicKey;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -97,11 +99,24 @@ public class EmployeeTest {
         assertEquals(35500.00, e7.getSalary());
     }
 
-    // Test setAge method with age 55
+    // Test private setAge method with age 55
     @Test
-    public void test_SetAge() {
-        employee.setAge(55);
-        assertEquals(55, employee.getAge());
+    public void test_SetAge() throws Exception{
+        System.out.println("setAgeMethod");
+
+        Employee e8 = new Employee("Anna Kovalenko", 19, 4);
+        Method method = Employee.class.getDeclaredMethod("setAge", int.class);
+        method.setAccessible(true);
+        method.invoke(e8, 55);
+
+        Class secretClass = e8.getClass();
+        Field f = secretClass.getDeclaredField("age");
+        f.setAccessible(true);
+
+        int result = f.getInt(e8);
+        System.out.println("The value in f (age) is " + f.get(e8));
+
+        assertEquals(55, result);
     }
 
 }
