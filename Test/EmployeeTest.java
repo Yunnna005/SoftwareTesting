@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,6 +13,7 @@ public class EmployeeTest {
 
     //Test Constructor
     @Test
+    @Order(1)
     public void test_EmployeeConstructor(){
         System.out.println("Testing Constructor");
         assertNotNull(employee);
@@ -29,6 +31,7 @@ public class EmployeeTest {
 
     //Test Age
     @Test
+
     public void test_GetAge(){
         assertEquals(19, employee.getAge());
     }
