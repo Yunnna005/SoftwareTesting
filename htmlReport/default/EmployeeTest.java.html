@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EmployeeTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">EmployeeTest.java</span></div><h1>EmployeeTest.java</h1><pre class="source lang-java linenums">import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+<span class="fc" id="L17">public class EmployeeTest {</span>
+<span class="fc" id="L18">    Employee employee = new Employee(&quot;Anna Kovalenko&quot;, 19, 4);</span>
+
+<span class="fc" id="L20">    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();</span>
+
+    //Test Constructor
+    @BeforeEach
+    public void test_EmployeeConstructor(){
+<span class="fc" id="L25">        System.out.println(&quot;Testing Constructor&quot;);</span>
+<span class="fc" id="L26">        assertNotNull(employee);</span>
+<span class="fc" id="L27">        assertEquals(&quot;Anna Kovalenko&quot;,  employee.getName());</span>
+<span class="fc" id="L28">        assertEquals(19,  employee.getAge());</span>
+<span class="fc" id="L29">        assertEquals(4,  employee.getExperience());</span>
+<span class="fc" id="L30">        assertEquals(30400, employee.getSalary());</span>
+<span class="fc" id="L31">    }</span>
+
+    //Test Name
+    @Test
+    public void test_GetName(){
+<span class="fc" id="L36">        assertEquals(&quot;Anna Kovalenko&quot;, employee.getName());</span>
+<span class="fc" id="L37">    }</span>
+
+    //Test Age
+    @Test
+
+    public void test_GetAge(){
+<span class="fc" id="L43">        assertEquals(19, employee.getAge());</span>
+<span class="fc" id="L44">    }</span>
+
+    //Test Experience
+    @Test
+    public void test_GetExperience(){
+<span class="fc" id="L49">        assertEquals(4, employee.getExperience());</span>
+<span class="fc" id="L50">    }</span>
+
+    //Test T1
+    @Test
+    public void test_Employee_Valid(){
+<span class="fc" id="L55">        assertEquals(&quot;Anna Kovalenko&quot;, employee.getName());</span>
+<span class="fc" id="L56">        assertEquals(19, employee.getAge());</span>
+<span class="fc" id="L57">        assertEquals(4, employee.getExperience());</span>
+<span class="fc" id="L58">    }</span>
+
+    // Test T2
+    @Test
+    public void test_GetName_Invalid() {
+<span class="fc" id="L63">        assertThrows(IllegalArgumentException.class, () -&gt; {</span>
+<span class="nc" id="L64">            new Employee(&quot;&quot;, 30, 5);</span>
+<span class="nc" id="L65">        });</span>
+<span class="fc" id="L66">    }</span>
+
+    //Test T3
+    @Test
+    public void test_GetAge_Invalid(){
+<span class="fc" id="L71">        assertThrows(IllegalArgumentException.class, ()-&gt;{</span>
+<span class="nc" id="L72">            Employee e2 = new Employee(&quot;Anna Kovalenko&quot;, 15, 4);</span>
+<span class="nc" id="L73">        });</span>
+<span class="fc" id="L74">    }</span>
+
+    //Test T5
+    @Test
+    public void test_GetExperience_Invalid(){
+<span class="fc" id="L79">        Employee e3 = new Employee(&quot;Anna Kovalenko&quot;, 25, 2);</span>
+<span class="fc" id="L80">        assertEquals(2, e3.getExperience());</span>
+<span class="fc" id="L81">    }</span>
+
+    //Test T7
+    @Test
+    public void test_GetAge_getExperience_Invalid(){
+<span class="fc" id="L86">        assertThrows(IllegalArgumentException.class, ()-&gt;{</span>
+<span class="nc" id="L87">            Employee e4 = new Employee(&quot;Anna Kovalenko&quot;, 64, 1);</span>
+<span class="nc" id="L88">            assertEquals(1, e4.getExperience());</span>
+<span class="nc" id="L89">        });</span>
+<span class="fc" id="L90">    }</span>
+
+    //Test T9
+    @Test
+    public void test_GetSelary_Less40_Less6(){
+<span class="fc" id="L95">        assertEquals(30400.00, employee.getSalary());</span>
+<span class="fc" id="L96">    }</span>
+
+    //Test T10
+    @Test
+    public void test_GetSelary_Less40_More6(){
+<span class="fc" id="L101">        Employee e5 = new Employee(&quot;Anna Kovalenko&quot;, 30, 9);</span>
+<span class="fc" id="L102">        assertEquals(31900.00, e5.getSalary());</span>
+<span class="fc" id="L103">    }</span>
+
+    //Test T11
+    @Test
+    public void test_GetSelary_More40_Less6(){
+<span class="fc" id="L108">        Employee e6= new Employee(&quot;Anna Kovalenko&quot;, 45, 5);</span>
+<span class="fc" id="L109">        assertEquals(33750.00, e6.getSalary());</span>
+<span class="fc" id="L110">    }</span>
+
+    //Test T12
+    @Test
+    public void test_GetSelary_More40_More6(){
+<span class="fc" id="L115">        Employee e7 = new Employee(&quot;Anna Kovalenko&quot;, 62, 10);</span>
+<span class="fc" id="L116">        assertEquals(35500.00, e7.getSalary());</span>
+<span class="fc" id="L117">    }</span>
+
+
+    // Test private setAge method with age 55
+    @Test
+    public void test_SetAge() throws Exception{
+<span class="fc" id="L123">        System.out.println(&quot;setAgeMethod&quot;);</span>
+
+<span class="fc" id="L125">        Employee e8 = new Employee(&quot;Dasha&quot;, 20, 5);</span>
+
+<span class="fc" id="L127">        Method method = Employee.class.getDeclaredMethod(&quot;setAge&quot;, int.class);</span>
+<span class="fc" id="L128">        method.setAccessible(true);</span>
+<span class="fc" id="L129">        method.invoke(e8, 55);</span>
+
+<span class="fc" id="L131">        Class secretClass = e8.getClass();</span>
+<span class="fc" id="L132">        Field f = secretClass.getDeclaredField(&quot;age&quot;);</span>
+<span class="fc" id="L133">        f.setAccessible(true);</span>
+
+<span class="fc" id="L135">        int result = f.getInt(e8);</span>
+<span class="fc" id="L136">        System.out.println(&quot;The value in f (age) is &quot; + f.get(e8));</span>
+
+<span class="fc" id="L138">        assertEquals(55, result);</span>
+<span class="fc" id="L139">    }</span>
+
+    //Test Invalid Name Boundary
+    @ParameterizedTest
+    @ValueSource(strings = {&quot;&quot;, &quot;Abcdefghigklmnopqrstlmnopqrrergrgbhrdbgbgldbbhrjbjhr&quot;})
+    public void test_GetName_Invalid_Boundary(String name){
+<span class="pc" id="L145">        assertThrows(IllegalArgumentException.class, () -&gt; new Employee(name, 19, 4));</span>
+<span class="fc" id="L146">    }</span>
+
+    //Test Valid Name Boundary
+    @ParameterizedTest
+    @ValueSource(
+            strings = {&quot;Anna&quot;, &quot;A A A&quot;, &quot;anna&quot;, &quot;ANNA&quot;})
+    public void test_GetName_Valid_Boundary(String name){
+<span class="fc" id="L153">        new Employee(name, 19, 4);</span>
+<span class="fc" id="L154">    }</span>
+
+    //Test Invalid Age Boundary
+    @ParameterizedTest
+    @ValueSource(ints = {17, 0, 63})
+    public void test_GetAge_Invalid_Boundary(int age){
+<span class="pc" id="L160">        assertThrows(IllegalArgumentException.class, ()-&gt; new Employee(&quot;Anna Kovalenko&quot;, age, 4));</span>
+<span class="fc" id="L161">    }</span>
+
+    //Test Valid Age Boundary
+    @ParameterizedTest
+    @ValueSource(ints = {19, 44, 60})
+    public void test_GetAge_Valid_Boundary(int age){
+<span class="fc" id="L167">        new Employee(&quot;Anna Kovalenko&quot;, age, 4);</span>
+<span class="fc" id="L168">    }</span>
+
+    //Test Invalid Experience Boundary
+    @ParameterizedTest
+    @ValueSource(ints = {1,0,-2})
+    public void test_GetExperience_Invalid_Boundary(int exp){
+<span class="fc" id="L174">        Employee e10 = new Employee(&quot;Anna Kovalenko&quot;, 19, exp);</span>
+<span class="fc" id="L175">        assertEquals(exp, e10.getExperience());</span>
+<span class="fc" id="L176">    }</span>
+
+    //Test Valid Experience Boundary
+    @ParameterizedTest
+    @ValueSource(ints = {3,6,22})
+    public void test_GetExperience_Valid_Boundary(int exp){
+<span class="fc" id="L182">        new Employee(&quot;Anna Kovalenko&quot;, 19, exp);</span>
+<span class="fc" id="L183">    }</span>
+
+    //Test Print Employee
+    @Test
+    public void test_PrintEmployee() throws IOException {
+<span class="fc" id="L188">        ByteArrayOutputStream baos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L189">        System.setOut(new PrintStream(baos));</span>
+<span class="fc" id="L190">        Employee e11 = new Employee(&quot;Kate&quot;, 21, 4);</span>
+<span class="fc" id="L191">        e11.printEmployee();</span>
+<span class="fc" id="L192">        baos.flush();</span>
+<span class="fc" id="L193">        String whatWasPrinted = new String(baos.toByteArray());</span>
+<span class="fc" id="L194">        assertEquals(&quot; Name:Kate\n Age:21\n Experience:4\n Salary:30400.0&quot;, whatWasPrinted);</span>
+<span class="fc" id="L195">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

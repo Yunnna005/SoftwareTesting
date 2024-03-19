@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Employee</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Employee (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Employee</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.6%
+  </span>
+  <span class="absValue">
+    (21/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;public class Employee {
+&nbsp;
+&nbsp;    String name;
+&nbsp;    int age;
+&nbsp;    int years_experience;
+&nbsp;    double salary;
+&nbsp;
+&nbsp;    // This is the constructor of the class Employee
+<b class="fc">&nbsp;    public Employee (String name, int empAge, int years_exp){</b>
+&nbsp;
+<b class="fc">&nbsp;        setName(name);</b>
+<b class="fc">&nbsp;        setAge(empAge);</b>
+<b class="fc">&nbsp;        setExperience(years_exp);</b>
+<b class="fc">&nbsp;        setSalary();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void setName(String name) {
+<b class="fc">&nbsp;        if ((name.isEmpty()) || (name.length() &gt; 40) ){</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Name must not be empty and must be less than 40 characters&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Assign the age of the Employee  to the variable age.
+&nbsp;    private void setAge(int empAge) {
+&nbsp;        try{
+<b class="fc">&nbsp;            if ((empAge &lt; 18 ) || (empAge &gt; 62)) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;The employee age must be between 18 and 62&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (IllegalArgumentException e) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Error &quot; + e.getMessage());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        age = empAge;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Assign the years experience to the variable years experience.*/
+&nbsp;    private void setExperience(int years_exp) {
+&nbsp;        try {
+<b class="fc">&nbsp;            if (years_exp &lt; 3) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;The employee must have a minimum of 3 years experience&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (IllegalArgumentException e) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Error &quot; + e.getMessage());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        years_experience = years_exp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Assign the salary to the variable salary.*/
+&nbsp;    private void setSalary() {
+<b class="fc">&nbsp;        if (age &lt;= 40) {</b>
+<b class="fc">&nbsp;            if (years_experience &lt;= 6) {</b>
+<b class="fc">&nbsp;                salary = 30000.00 + (100 * years_experience);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                salary = 31000.00 + (100 * years_experience);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        else {
+<b class="nc">&nbsp;            if (years_experience &lt;= 6) {</b>
+<b class="nc">&nbsp;                salary = 33000.00 + (150 * years_experience);</b>
+&nbsp;            }
+&nbsp;            else
+<b class="nc">&nbsp;                salary = 34000.00 + (150 * years_experience);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public String getName(){
+<b class="fc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getAge(){
+<b class="fc">&nbsp;        return age;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getExperience(){
+<b class="fc">&nbsp;        return years_experience;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getSalary(){
+<b class="fc">&nbsp;        return salary;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Print the Employee details */
+&nbsp;    public void printEmployee() {
+<b class="nc">&nbsp;        System.out.print(&quot; Name:&quot;+ name + &quot;\n Age:&quot; + age + &quot;\n Experience:&quot; +  years_experience + &quot;\n Salary:&quot; + salary);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-19 12:04</div>
+</div>
+</body>
+</html>

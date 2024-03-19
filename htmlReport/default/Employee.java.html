@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Employee.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EmployeeTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Employee.java</span></div><h1>Employee.java</h1><pre class="source lang-java linenums">public class Employee {
+
+    String name;
+    int age;
+    int years_experience;
+    double salary;
+
+    // This is the constructor of the class Employee
+<span class="fc" id="L9">    public Employee (String name, int empAge, int years_exp){</span>
+
+<span class="fc" id="L11">        setName(name);</span>
+<span class="fc" id="L12">        setAge(empAge);</span>
+<span class="fc" id="L13">        setExperience(years_exp);</span>
+<span class="fc" id="L14">        setSalary();</span>
+
+<span class="fc" id="L16">    }</span>
+
+
+    private void setName(String name) {
+<span class="fc bfc" id="L20" title="All 4 branches covered.">        if ((name.isEmpty()) || (name.length() &gt; 40) ){</span>
+<span class="fc" id="L21">            throw new IllegalArgumentException(&quot;Name must not be empty and must be less than 40 characters&quot;);</span>
+        }
+<span class="fc" id="L23">        this.name = name;</span>
+<span class="fc" id="L24">    }</span>
+
+    // Assign the age of the Employee  to the variable age.
+    private void setAge(int empAge) {
+
+<span class="fc bfc" id="L29" title="All 4 branches covered.">        if ((empAge &lt; 18 ) || (empAge &gt; 62)) {</span>
+<span class="fc" id="L30">            throw new IllegalArgumentException(&quot;The employee age must be between 18 and 62&quot;);</span>
+        }
+<span class="fc" id="L32">        age = empAge;</span>
+<span class="fc" id="L33">    }</span>
+
+    /* Assign the years experience to the variable years experience.*/
+    private void setExperience(int years_exp) {
+        try {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            if (years_exp &lt; 3) {</span>
+<span class="fc" id="L39">                throw new IllegalArgumentException(&quot;The employee must have a minimum of 3 years experience&quot;);</span>
+            }
+<span class="fc" id="L41">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L42">            System.out.println(&quot;Error &quot; + e.getMessage());</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">        years_experience = years_exp;</span>
+<span class="fc" id="L45">    }</span>
+
+    /* Assign the salary to the variable salary.*/
+    private void setSalary() {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (age &lt;= 40) {</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (years_experience &lt;= 6) {</span>
+<span class="fc" id="L51">                salary = 30000.00 + (100 * years_experience);</span>
+            } else {
+<span class="fc" id="L53">                salary = 31000.00 + (100 * years_experience);</span>
+            }
+        }
+        else {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (years_experience &lt;= 6) {</span>
+<span class="fc" id="L58">                salary = 33000.00 + (150 * years_experience);</span>
+            }
+            else
+<span class="fc" id="L61">                salary = 34000.00 + (150 * years_experience);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+
+    public String getName(){
+<span class="fc" id="L67">        return name;</span>
+    }
+
+    public int getAge(){
+<span class="fc" id="L71">        return age;</span>
+    }
+
+    public int getExperience(){
+<span class="fc" id="L75">        return years_experience;</span>
+    }
+
+    public double getSalary(){
+<span class="fc" id="L79">        return salary;</span>
+    }
+
+    /* Print the Employee details */
+    public void printEmployee() {
+<span class="fc" id="L84">        System.out.print(&quot; Name:&quot;+ name + &quot;\n Age:&quot; + age + &quot;\n Experience:&quot; +  years_experience + &quot;\n Salary:&quot; + salary);</span>
+<span class="fc" id="L85">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

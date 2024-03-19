@@ -1,19 +1,26 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EmployeeTest {
     Employee employee = new Employee("Anna Kovalenko", 19, 4);
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
     //Test Constructor
-    @Test
-    @Order(1)
+    @BeforeEach
     public void test_EmployeeConstructor(){
         System.out.println("Testing Constructor");
         assertNotNull(employee);
@@ -54,7 +61,7 @@ public class EmployeeTest {
     @Test
     public void test_GetName_Invalid() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Employee e1 = new Employee("", 30, 5);
+            new Employee("", 30, 5);
         });
     }
 
@@ -72,6 +79,7 @@ public class EmployeeTest {
         Employee e3 = new Employee("Anna Kovalenko", 25, 2);
         assertEquals(2, e3.getExperience());
     }
+
     //Test T7
     @Test
     public void test_GetAge_getExperience_Invalid(){
@@ -114,7 +122,7 @@ public class EmployeeTest {
     public void test_SetAge() throws Exception{
         System.out.println("setAgeMethod");
 
-        Employee e8 = new Employee("Anna Kovalenko", 19, 4);
+        Employee e8 = new Employee("Dasha", 20, 5);
 
         Method method = Employee.class.getDeclaredMethod("setAge", int.class);
         method.setAccessible(true);
@@ -174,4 +182,15 @@ public class EmployeeTest {
         new Employee("Anna Kovalenko", 19, exp);
     }
 
+    //Test Print Employee
+    @Test
+    public void test_PrintEmployee() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+        Employee e11 = new Employee("Kate", 21, 4);
+        e11.printEmployee();
+        baos.flush();
+        String whatWasPrinted = new String(baos.toByteArray());
+        assertEquals(" Name:Kate\n Age:21\n Experience:4\n Salary:30400.0", whatWasPrinted);
+    }
 }
